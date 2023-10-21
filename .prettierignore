@@ -14,3 +14,4 @@ coverage.json
 yarn-debug.log*
 yarn-error.log*
 slither.db.json
+slither.config.json
