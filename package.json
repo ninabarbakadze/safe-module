@@ -12,7 +12,7 @@
     "solhint": "solhint --config ./.solhint.json {contracts,test}/**/*.sol",
     "prettier": "prettier --config ./.prettierrc --write **/*.{json,md,sol,yml}",
     "lint:check": "yarn prettier:check && yarn solhint:check",
-    "prettier:check": "prettier --config ./.prettierrc --check **/*.{json,md,sol,yml}",
+    "prettier:check": "prettier --config ./.prettierrc --check --ignore-path ./.prettierignore **/*.{json,md,sol,yml}",
     "solhint:check": "solhint --config ./.solhint.json {contracts,test}/**/*.sol -q"
   }
 }
