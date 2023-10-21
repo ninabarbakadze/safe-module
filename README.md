@@ -70,7 +70,7 @@ The next thing I'd do would be to actually deploy the Module onto a public testn
 
 As TokenWithdrawModule deals with moving user's funds out of the Safe and signature verification there has to be vigorous testing and audit done in order to avoid common security vulnerabilities associated with such functionality like reentrancy and signature replay attacks.
 
-### Developer Experience 
+### Developer Experience
 
 - Add more GitHub Actions && checks like test coverage reports, etc to ensure that the system is properly verified
 - Add audit report and proper documentation to make the module easier to use and integrate
