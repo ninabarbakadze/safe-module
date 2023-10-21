@@ -1,0 +1,16 @@
+{
+  "name": "safe-takehome",
+  "version": "0.1.0",
+  "description": "Token Withdraw Module",
+  "author": "Nina Barbakadze <barbakadzeninaa@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prettier-plugin-solidity": "^1.1.3",
+    "solhint": "^3.6.2"
+  },
+  "scripts": {
+    "solhint": "solhint --config ./.solhint.json {contracts,test}/**/*.sol",
+    "prettier": "prettier --config ./.prettierrc --write **/*.{json,md,sol,yml}",
+    "lint:check": "yarn prettier:check && yarn solhint:check"
+  }
+}
