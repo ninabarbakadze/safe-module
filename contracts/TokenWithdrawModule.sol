@@ -6,7 +6,7 @@ import {Enum} from "safe-contracts/common/Enum.sol";
 import {Safe} from "safe-contracts/Safe.sol";
 
 /**
- * @title WithdrawModule - A Safe Module with alternative access functionality
+ * @title TokenWithdrawModule - A Safe Module with alternative access functionality
  *        allowing accounts that are not related to the Safe,
  *        to withdraw a predetermined amount of a specific token.
  * @author Nina Barbakadze - @ninabarbakadze
@@ -37,7 +37,7 @@ contract TokenWithdrawModule is SignatureDecoder {
    * @param _safe The address of the Safe associated with this module.
    */
   constructor(address _token, address payable _safe) {
-    require(_safe != address(0), "Safe address must not be a zero address");
+    require(_safe != address(0), "Safe must not be a zero address");
     token = _token;
     safe = Safe(_safe);
   }
@@ -104,7 +104,6 @@ contract TokenWithdrawModule is SignatureDecoder {
       signer = ecrecover(dataHash, v, r, s);
     }
 
-    require(signer != address(0), "Invalid signer");
     return safe.isOwner(signer);
   }
 
@@ -115,7 +114,7 @@ contract TokenWithdrawModule is SignatureDecoder {
    * @param signature The signature authorizing the withdrawal.
    */
   function withdraw(address recipient, uint256 amount, bytes memory signature) external {
-    require(recipient != address(0), "Invalid recipient address");
+    require(recipient != address(0), "Recipient must not be a zero address");
     require(amount > 0, "Amount must be greater than 0");
 
     // Recreate the data hash for signature verification

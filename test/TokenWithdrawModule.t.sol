@@ -1,9 +1,9 @@
 pragma solidity ^0.8.20;
 
 import {TokenWithdrawModule} from "../contracts/TokenWithdrawModule.sol";
+import {Test} from "forge-std/Test.sol";
 import {MockSafe} from "./mocks/MockSafe.sol";
 import {MockERC20} from "./mocks/MockERC20.sol";
-import {Test} from "forge-std/Test.sol";
 import {Enum} from "safe-contracts/common/Enum.sol";
 import {console2 as console} from "forge-std/Test.sol";
 
@@ -98,7 +98,7 @@ contract TokenWithdrawModuleTest is Test {
 
 contract TokenWithdrawModuleTest_constructor is TokenWithdrawModuleTest {
   function test_deployWhenSafeAddressIsZero_shouldRevert() public {
-    vm.expectRevert("Safe address must not be a zero address");
+    vm.expectRevert("Safe must not be a zero address");
     tokenWithdrawModule = new TokenWithdrawModule(address(mockERC20), payable(address(0)));
   }
 
@@ -156,12 +156,12 @@ contract TokenWithdrawModuleTest_generateWithdrawDataHash is TokenWithdrawModule
 contract TokenWithdrawModuleTest_withdraw is TokenWithdrawModuleTest {
   function test_withdraw_whenAmountIsZero_shouldRevert() public {
     vm.expectRevert("Amount must be greater than 0");
-    tokenWithdrawModule.withdraw(recipient, 0, bytes("0"));
+    tokenWithdrawModule.withdraw(recipient, 0, bytes(""));
   }
 
   function test_withdraw_whenAddressIsZero_shouldRevert() public {
-    vm.expectRevert("Invalid recipient address");
-    tokenWithdrawModule.withdraw(address(0), 1, bytes("0"));
+    vm.expectRevert("Recipient must not be a zero address");
+    tokenWithdrawModule.withdraw(address(0), 1, bytes(""));
   }
 
   function test_withdraw_withUnauthorizedRecipient_shouldRevert() public {
@@ -257,7 +257,7 @@ contract TokenWithdrawModuleTest_withdraw is TokenWithdrawModuleTest {
     tokenWithdrawModule.withdraw(recipient, 2, signature);
   }
 
-  function test_withdraw_whenWithdrawingEth_shouldWithdraw() public {
+  function test_withdraw_whenWithdrawingEther_shouldWithdraw() public {
     // Deploy new TokenWithdrawModule without token --> will default to Ether transfers
     deployTokenWithdrawModule(address(0), address(safe));
 

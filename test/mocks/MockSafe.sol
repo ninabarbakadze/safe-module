@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import {Enum} from "safe-contracts/common/Enum.sol";
 
+// Simplified version of the Safe for unit testing purposes
 contract MockSafe {
   address owner;
 
